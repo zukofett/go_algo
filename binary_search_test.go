@@ -1,10 +1,12 @@
 package main
 
 import (
+	"cmp"
+	"strings"
 	"testing"
 )
 
-func TestLinearSearchInts(t *testing.T) {
+func TestBinarySearchInts(t *testing.T) {
 	arr := []int{1, 3, 4, 69, 71, 81, 90, 99, 420, 1337, 69420}
 	cases := []struct {
 		name    string
@@ -47,7 +49,7 @@ func TestLinearSearchInts(t *testing.T) {
 
 	for _, tt := range cases {
 		t.Run(tt.name, func(t *testing.T) {
-			gotIdx, got := LinearSearch(tt.toFind, arr)
+			gotIdx, got := BinarySearch(tt.toFind, arr, cmp.Compare[int])
 			if got != tt.want {
 				t.Errorf("got %t; want %t", got, tt.want)
 			}
@@ -58,8 +60,8 @@ func TestLinearSearchInts(t *testing.T) {
 	}
 }
 
-func TestLinearSearchStrings(t *testing.T) {
-	arr := []string{"1", "3", "4", "69", "71", "81", "90", "99", "420", "1337", "69420"}
+func TestBinarySearchStrings(t *testing.T) {
+	arr := []string{"1", "1337", "3", "4", "420", "69", "69420", "71", "81", "90", "99"}
 	cases := []struct {
 		name    string
 		toFind  string
@@ -70,7 +72,7 @@ func TestLinearSearchStrings(t *testing.T) {
 			name:    "69 exists",
 			toFind:  "69",
 			want:    true,
-			wantIdx: 3,
+			wantIdx: 5,
 		}, {
 			name:    "1336 doesn't exists",
 			toFind:  "1336",
@@ -80,7 +82,7 @@ func TestLinearSearchStrings(t *testing.T) {
 			name:    "69420 exists",
 			toFind:  "69420",
 			want:    true,
-			wantIdx: 10,
+			wantIdx: 6,
 		}, {
 			name:    "69421 doesn't exists",
 			toFind:  "69421",
@@ -101,7 +103,7 @@ func TestLinearSearchStrings(t *testing.T) {
 
 	for _, tt := range cases {
 		t.Run(tt.name, func(t *testing.T) {
-			gotIdx, got := LinearSearch(tt.toFind, arr)
+			gotIdx, got := BinarySearch(tt.toFind, arr, strings.Compare)
 			if got != tt.want {
 				t.Errorf("got %t; want %t", got, tt.want)
 			}
@@ -112,12 +114,12 @@ func TestLinearSearchStrings(t *testing.T) {
 	}
 }
 
-func TestLinearSearchEmptyArr(t *testing.T) {
+func TestBinarySearchEmptyArr(t *testing.T) {
 	arr := []int{}
 	vals := []int{1, 3, 4, 69, 71, 81, 90, 99, 420, 1337, 69420, 0}
 
 	for _, val := range vals {
-		if _, exists := LinearSearch(val, arr); exists {
+		if _, exists := BinarySearch(val, arr, cmp.Compare[int]); exists {
 			t.Errorf("expected arr to be empty but found %d", val)
 		}
 	}
