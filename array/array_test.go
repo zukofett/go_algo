@@ -135,7 +135,7 @@ func TestZeroValues(t *testing.T) {
 	arr := NewArray[int](3)
 
 	for i := range arr.size {
-		if got := arr.Get(i); 0 != got {
+		if got := arr.Get(i); got != 0 {
 			t.Errorf("in index %d, got: %d; expected zero", i, got)
 		}
 	}

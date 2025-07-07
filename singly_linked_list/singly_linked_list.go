@@ -76,14 +76,13 @@ func (l *SinglyLinkedList[T]) Remove(at *Node[T]) *Node[T] {
 		return nil
 	}
 
-    if l.tail == at.next {
-        l.tail = at
-    }
+	if l.tail == at.next {
+		l.tail = at
+	}
 
 	at.Data = at.next.Data
 	at.next = at.next.next
 	l.length--
-
 
 	return at
 }

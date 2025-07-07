@@ -230,7 +230,7 @@ func TestRemove(t *testing.T) {
 func TestRemoveEdge(t *testing.T) {
 	t.Run("nil list", func(t *testing.T) {
 		var list *SinglyLinkedList[int]
-		var at *Node[int] = &Node[int]{}
+		at := &Node[int]{}
 		got := list.Remove(at)
 		if got != nil {
 			t.Errorf("got node = %v, want nil", got)
@@ -327,89 +327,89 @@ func TestFind(t *testing.T) {
 
 func TestForEach(t *testing.T) {
 	cases := []struct {
-		name    string
-		initial []int
-		do      func(*int) bool
-		want    []int
-        wantStop int
+		name     string
+		initial  []int
+		do       func(*int) bool
+		want     []int
+		wantStop int
 	}{
-        {
-            name: "iterate over all",
-            initial: []int{1, 2, 3, 4, 5},
-            do: func(i *int) bool {
-                *i = *i * *i
-                return true
-            },
-            want: []int{1, 4, 9, 16, 25},
-            wantStop: 0,
-        },{
-            name: "stop immediately",
-            initial: []int{1, 2, 3, 4, 5},
-            do: func(i *int) bool {
-                return false
-            },
-            want: []int{1, 2, 3, 4, 5},
-            wantStop: 1,
-        },{
-            name: "stop at middle",
-            initial: []int{1, 2, 3, 4, 5},
-            do: func(i *int) bool {
-                if *i == 3 {
-                    return false
-                }
-                *i = *i * *i
-                return true
-            },
-            want: []int{1, 4, 3, 4, 5},
-            wantStop: 3,
-        },{
-            name: "empty list",
-            initial: []int{},
-            do: func(i *int) bool {
-                *i = *i * *i
-                return true
-            },
-            want: []int{},
-            wantStop: 0,
-        },{
-            name: "single item",
-            initial: []int{9},
-            do: func(i *int) bool {
-                *i = *i * *i
-                return true
-            },
-            want: []int{81},
-            wantStop: 0,
-        },{
-            name: "single item stop immediately",
-            initial: []int{9},
-            do: func(i *int) bool {
-                return false
-            },
-            want: []int{9},
-            wantStop: 9,
-        },
-    }
+		{
+			name:    "iterate over all",
+			initial: []int{1, 2, 3, 4, 5},
+			do: func(i *int) bool {
+				*i = *i * *i
+				return true
+			},
+			want:     []int{1, 4, 9, 16, 25},
+			wantStop: 0,
+		}, {
+			name:    "stop immediately",
+			initial: []int{1, 2, 3, 4, 5},
+			do: func(i *int) bool {
+				return false
+			},
+			want:     []int{1, 2, 3, 4, 5},
+			wantStop: 1,
+		}, {
+			name:    "stop at middle",
+			initial: []int{1, 2, 3, 4, 5},
+			do: func(i *int) bool {
+				if *i == 3 {
+					return false
+				}
+				*i = *i * *i
+				return true
+			},
+			want:     []int{1, 4, 3, 4, 5},
+			wantStop: 3,
+		}, {
+			name:    "empty list",
+			initial: []int{},
+			do: func(i *int) bool {
+				*i = *i * *i
+				return true
+			},
+			want:     []int{},
+			wantStop: 0,
+		}, {
+			name:    "single item",
+			initial: []int{9},
+			do: func(i *int) bool {
+				*i = *i * *i
+				return true
+			},
+			want:     []int{81},
+			wantStop: 0,
+		}, {
+			name:    "single item stop immediately",
+			initial: []int{9},
+			do: func(i *int) bool {
+				return false
+			},
+			want:     []int{9},
+			wantStop: 9,
+		},
+	}
 
-    for _, tt := range cases {
-        t.Run(tt.name, func(t *testing.T) {
-            l := createListFromSlice(tt.initial)
-            res := l.ForEach(l.Begin(), l.End(), tt.do)
+	for _, tt := range cases {
+		t.Run(tt.name, func(t *testing.T) {
+			l := createListFromSlice(tt.initial)
+			res := l.ForEach(l.Begin(), l.End(), tt.do)
 
-            if !slices.Equal(l.ToSilce(), tt.want) {
-                t.Errorf("expected list to to equal %v but got %v", tt.want, l.ToSilce())
-            }
+			if !slices.Equal(l.ToSilce(), tt.want) {
+				t.Errorf("expected list to to equal %v but got %v", tt.want, l.ToSilce())
+			}
 
-            if res == nil {
-                t.Fatal("got nil result")
-            }
+			if res == nil {
+				t.Fatal("got nil result")
+			}
 
-            stopNode := l.Find(l.Begin(), l.End(), &tt.wantStop, compInts)
-            if stopNode != res {
-                t.Errorf("expected node to equal %v but got %v", stopNode, res)
-            }
-        })
-    }
+			stopNode := l.Find(l.Begin(), l.End(), &tt.wantStop, compInts)
+			if stopNode != res {
+				t.Errorf("expected node to equal %v but got %v", stopNode, res)
+			}
+		})
+	}
 }
 
 /******************************************************************************

@@ -230,7 +230,7 @@ func TestDListRemove(t *testing.T) {
 func TestDListRemoveEdge(t *testing.T) {
 	t.Run("nil list", func(t *testing.T) {
 		var list *DoublyLinkedList[int]
-		var at *DLLNode[int] = &DLLNode[int]{}
+		at := &DLLNode[int]{}
 		got := list.Remove(at)
 		if got != nil {
 			t.Errorf("got node = %v, want nil", got)
@@ -549,7 +549,7 @@ func TestDListPopBack(t *testing.T) {
 			want:    []int{},
 			wantLen: 0,
 		},
-        {
+		{
 			name:    "pop one val from non-empty list",
 			initial: []int{1, 2},
 			vals:    []int{2},
@@ -616,7 +616,7 @@ func TestDListPopFront(t *testing.T) {
 			want:    []int{},
 			wantLen: 0,
 		},
-        {
+		{
 			name:    "pop one val from non-empty list",
 			initial: []int{1, 2},
 			vals:    []int{1},
