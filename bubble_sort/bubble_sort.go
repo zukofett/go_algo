@@ -1,7 +1,7 @@
-package main
+package bubblesort
 
 func BubbleSort[S ~[]T, T comparable](s S, comp func(T, T) int) {
-	for i := 0; i < len(s); i++ {
+	for i := range s {
 		changed := false
 		for j := 0; j < len(s)-1-i; j++ {
 			if res := comp(s[j], s[j+1]); res > 0 {

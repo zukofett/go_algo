@@ -1,4 +1,4 @@
-package main
+package binarysearch
 
 func BinarySearch[S ~[]T, T comparable](needle T, haystack S, comp func(T, T) int) (int, bool) {
 	start := 0

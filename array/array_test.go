@@ -1,4 +1,4 @@
-package main
+package array
 
 import (
 	"runtime"
@@ -230,7 +230,7 @@ func BenchmarkSliceSet(b *testing.B) {
 
 func BenchmarkArrayGet(b *testing.B) {
 	arr := NewArray[int](1000)
-	for i := 0; i < 1000; i++ {
+	for i := range 1000 {
 		arr.Set(i, i)
 	}
 
@@ -242,7 +242,7 @@ func BenchmarkArrayGet(b *testing.B) {
 
 func BenchmarkSliceGet(b *testing.B) {
 	slice := make([]int, 1000)
-	for i := 0; i < 1000; i++ {
+	for i := range 1000 {
 		slice[i] = i
 	}
 

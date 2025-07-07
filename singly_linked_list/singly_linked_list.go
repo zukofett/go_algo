@@ -1,4 +1,4 @@
-package main
+package singlylinkedlist
 
 type Node[T any] struct {
 	Data *T
@@ -76,13 +76,14 @@ func (l *SinglyLinkedList[T]) Remove(at *Node[T]) *Node[T] {
 		return nil
 	}
 
+    if l.tail == at.next {
+        l.tail = at
+    }
+
 	at.Data = at.next.Data
 	at.next = at.next.next
 	l.length--
 
-	if l.tail == at.next {
-		l.tail = at
-	}
 
 	return at
 }
@@ -98,7 +99,7 @@ func (l *SinglyLinkedList[T]) Find(from, to *Node[T], data *T, comp func(*T, *T)
 		}
 		from = from.next
 	}
-	return nil
+	return from
 }
 
 func (l *SinglyLinkedList[T]) ForEach(from, to *Node[T], do func(*T) bool) *Node[T] {
@@ -112,7 +113,7 @@ func (l *SinglyLinkedList[T]) ForEach(from, to *Node[T], do func(*T) bool) *Node
 		}
 		from = from.next
 	}
-	return nil
+	return from
 }
 
 func (l *SinglyLinkedList[T]) ToSilce() []T {

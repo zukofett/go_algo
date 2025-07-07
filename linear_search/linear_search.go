@@ -1,4 +1,4 @@
-package main
+package linearsearch
 
 func LinearSearch[S ~[]T, T comparable](needle T, haystack S) (int, bool) {
 	for i, ele := range haystack {
