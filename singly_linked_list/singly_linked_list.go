@@ -50,7 +50,7 @@ func (l *SinglyLinkedList[T]) End() *Node[T] {
 	return l.tail
 }
 
-// insert inserts a new node before 'at'
+// Insert inserts a new node before 'at'
 func (l *SinglyLinkedList[T]) Insert(at *Node[T], val *T) *Node[T] {
 	if l == nil || at == nil {
 		return nil
@@ -115,7 +115,7 @@ func (l *SinglyLinkedList[T]) ForEach(from, to *Node[T], do func(*T) bool) *Node
 	return from
 }
 
-func (l *SinglyLinkedList[T]) ToSilce() []T {
+func (l *SinglyLinkedList[T]) ToSlice() []T {
 	if l == nil || l.length == 0 {
 		return []T{}
 	}

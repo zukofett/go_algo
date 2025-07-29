@@ -195,7 +195,7 @@ func (l *DoublyLinkedList[T]) MultiFind(from, to *DLLNode[T], data *T, comp func
 	}
 }
 
-func (l *DoublyLinkedList[T]) ToSilce() []T {
+func (l *DoublyLinkedList[T]) ToSlice() []T {
 	if l == nil || l.length == 0 {
 		return []T{}
 	}

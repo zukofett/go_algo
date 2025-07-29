@@ -124,7 +124,7 @@ func TestDListInsert(t *testing.T) {
 				t.Error("want node; got nil")
 			}
 
-			got := list.ToSilce()
+			got := list.ToSlice()
 			if !slices.Equal(got, tt.want) {
 				t.Errorf("got %v; want %v", got, tt.want)
 			}
@@ -177,7 +177,7 @@ func TestDListRemove(t *testing.T) {
 		wantLen int
 	}{
 		{
-			name:    "remove at begining",
+			name:    "remove at beginning",
 			initial: []int{1, 2, 3},
 			atFunc: func(l *DoublyLinkedList[int]) *DLLNode[int] {
 				return l.Begin()
@@ -215,7 +215,7 @@ func TestDListRemove(t *testing.T) {
 				t.Error("want node; got nil")
 			}
 
-			got := list.ToSilce()
+			got := list.ToSlice()
 			if !slices.Equal(got, tt.want) {
 				t.Errorf("got %v; want %v", got, tt.want)
 			}
@@ -262,7 +262,7 @@ func TestDListFind(t *testing.T) {
 		shouldFind bool
 	}{
 		{
-			name:       "find at begining",
+			name:       "find at beginning",
 			initial:    []int{1, 2, 3, 4, 5},
 			toFind:     1,
 			shouldFind: true,
@@ -292,7 +292,7 @@ func TestDListFind(t *testing.T) {
 			toFind:     101,
 			shouldFind: true,
 		}, {
-			name:       "find non existant in single element list",
+			name:       "find non existent in single element list",
 			initial:    []int{101},
 			toFind:     100,
 			shouldFind: false,
@@ -396,8 +396,8 @@ func TestDListForEach(t *testing.T) {
 			l := createDListFromSlice(tt.initial)
 			res := l.ForEach(l.Begin(), l.End(), tt.do)
 
-			if !slices.Equal(l.ToSilce(), tt.want) {
-				t.Errorf("expected list to to equal %v but got %v", tt.want, l.ToSilce())
+			if !slices.Equal(l.ToSlice(), tt.want) {
+				t.Errorf("expected list to to equal %v but got %v", tt.want, l.ToSlice())
 			}
 
 			if res == nil {
@@ -461,7 +461,7 @@ func TestDListPushBack(t *testing.T) {
 				}
 			}
 
-			got := list.ToSilce()
+			got := list.ToSlice()
 			if !slices.Equal(got, tt.want) {
 				t.Errorf("got %v; want %v", got, tt.want)
 			}
@@ -522,7 +522,7 @@ func TestDListPushFront(t *testing.T) {
 				}
 			}
 
-			got := list.ToSilce()
+			got := list.ToSlice()
 			if !slices.Equal(got, tt.want) {
 				t.Errorf("got %v; want %v", got, tt.want)
 			}
@@ -576,7 +576,7 @@ func TestDListPopBack(t *testing.T) {
 				}
 			}
 
-			got := list.ToSilce()
+			got := list.ToSlice()
 			if !slices.Equal(got, tt.want) {
 				t.Errorf("got %v; want %v", got, tt.want)
 			}
@@ -643,7 +643,7 @@ func TestDListPopFront(t *testing.T) {
 				}
 			}
 
-			got := list.ToSilce()
+			got := list.ToSlice()
 			if !slices.Equal(got, tt.want) {
 				t.Errorf("got %v; want %v", got, tt.want)
 			}
